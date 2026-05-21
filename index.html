@@ -1468,5 +1468,24 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBBcQxAlg12mKbIGUgEQ7ZlT6KRXKRlHsc",
+  authDomain: "msdermapath-6090f.firebaseapp.com",
+  projectId: "msdermapath-6090f",
+  storageBucket: "msdermapath-6090f.firebasestorage.app",
+  messagingSenderId: "1085172673983",
+  appId: "1:1085172673983:web:d1dd3571931759ca54050a"
+};
+
+const app = initializeApp(firebaseConfig);
+
+console.log("Firebase conectado correctamente");
+
+</script>
+
 </body>
 </html>

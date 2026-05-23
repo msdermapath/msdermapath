@@ -977,6 +977,25 @@ window.open(
 
 }
 
+async function saveQuoteFirebase(data){
+
+try{
+
+await addDoc(
+collection(db,"cotizaciones"),
+data
+);
+
+console.log("Cotización sincronizada");
+
+}catch(error){
+
+console.error("Error Firebase:", error);
+
+}
+
+}
+
 function saveQuote(){
 
 if(selected.length===0){
@@ -1006,6 +1025,18 @@ markers:selected,
 saved:new Date().toLocaleString()
 });
 
+saveQuoteFirebase({
+empresa:empresa.value,
+paciente:paciente.value,
+caso:caso.value,
+fecha:fecha.value,
+totalBase:total,
+totalIncrease:totalIncrease,
+finalTotal:finalTotal,
+markers:selected,
+saved:new Date().toISOString()
+});
+
 localStorage.setItem(
 'ms_quotes',
 JSON.stringify(history)
@@ -1015,7 +1046,41 @@ alert('Cotización guardada correctamente');
 
 }
 
+async function syncQuotesFromFirebase(){
+
+try{
+
+const querySnapshot = await getDocs(
+collection(db,"cotizaciones")
+);
+
+let firebaseHistory = [];
+
+querySnapshot.forEach((doc)=>{
+
+firebaseHistory.push(doc.data());
+
+});
+
+localStorage.setItem(
+'ms_quotes',
+JSON.stringify(firebaseHistory)
+);
+
+console.log("Cotizaciones sincronizadas");
+
+}catch(error){
+
+console.error("Error sincronizando:", error);
+
+}
+
+}
+
+
 function showHistory(){
+
+syncQuotesFromFirebase();
 
 historyModal.style.display='block';
 
@@ -1472,6 +1537,13 @@ if ('serviceWorker' in navigator) {
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
+import {
+getFirestore,
+collection,
+addDoc,
+getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyBBcQxAlg12mKbIGUgEQ7ZlT6KRXKRlHsc",
   authDomain: "msdermapath-6090f.firebaseapp.com",
@@ -1482,6 +1554,13 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+window.db = db;
+window.collection = collection;
+window.addDoc = addDoc;
+window.getDocs = getDocs;
 
 console.log("Firebase conectado correctamente");
 

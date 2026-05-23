@@ -1022,7 +1022,7 @@ totalBase:total,
 totalIncrease:totalIncrease,
 finalTotal:finalTotal,
 markers:selected,
-saved:new Date().toLocaleString()
+saved: Date.now().toString()
 });
 
 saveQuoteFirebase({
@@ -1046,19 +1046,19 @@ alert('Cotización guardada correctamente');
 
 }
 
-async function syncQuotesFromFirebase(){
+function syncQuotesFromFirebase(){
 
-try{
+onSnapshot(
 
-const querySnapshot = await getDocs(
-collection(db,"cotizaciones")
-);
+collection(db,"cotizaciones"),
+
+(snapshot)=>{
 
 let firebaseHistory = [];
 
-querySnapshot.forEach((doc)=>{
+snapshot.forEach((documento)=>{
 
-firebaseHistory.push(doc.data());
+firebaseHistory.push(documento.data());
 
 });
 
@@ -1067,13 +1067,22 @@ localStorage.setItem(
 JSON.stringify(firebaseHistory)
 );
 
-console.log("Cotizaciones sincronizadas");
+console.log("Sincronización en tiempo real");
 
-}catch(error){
+showHistory();
 
-console.error("Error sincronizando:", error);
+},
+
+(error)=>{
+
+console.error(
+"Error sincronizando:",
+error
+);
 
 }
+
+);
 
 }
 
@@ -1241,13 +1250,38 @@ historyContent.innerHTML += section;
 }
 
 
-function deleteHistoryItem(savedId){
+async function deleteHistoryItem(savedId){
 
-let history=JSON.parse(localStorage.getItem('ms_quotes')||'[]');
+let history = JSON.parse(
+localStorage.getItem('ms_quotes') || '[]'
+);
 
-history=history.filter(q=>q.saved!==savedId);
+history = history.filter(
+q => q.saved !== savedId
+);
 
-localStorage.setItem('ms_quotes',JSON.stringify(history));
+localStorage.setItem(
+'ms_quotes',
+JSON.stringify(history)
+);
+
+const querySnapshot = await getDocs(
+collection(db,"cotizaciones")
+);
+
+querySnapshot.forEach(async (documento)=>{
+
+const data = documento.data();
+
+if(data.saved === savedId){
+
+await deleteDoc(
+doc(db,"cotizaciones",documento.id)
+);
+
+}
+
+});
 
 showHistory();
 
@@ -1541,7 +1575,10 @@ import {
 getFirestore,
 collection,
 addDoc,
-getDocs
+getDocs,
+deleteDoc,
+doc,
+onSnapshot
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -1561,6 +1598,9 @@ window.db = db;
 window.collection = collection;
 window.addDoc = addDoc;
 window.getDocs = getDocs;
+window.deleteDoc = deleteDoc;
+window.doc = doc;
+window.onSnapshot = onSnapshot;
 
 console.log("Firebase conectado correctamente");
 

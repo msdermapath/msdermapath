@@ -47,9 +47,28 @@ text-align:center;
 }
 
 .logo{
-width:180px;
+width:320px;
+max-width:90%;
 margin:auto;
 display:block;
+filter:drop-shadow(0 10px 20px rgba(0,0,0,0.25));
+animation:logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-8px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
 }
 
 .logo-title{
@@ -344,6 +363,97 @@ break-inside: avoid;
 page-break-inside: avoid;
 }
 }
+#splash-screen{
+position:fixed;
+inset:0;
+background:
+linear-gradient(
+135deg,
+#fff,
+#fff5f9
+);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:999999;
+animation:fadeOut 1s forwards;
+animation-delay:2.5s;
+}
+
+.splash-logo{
+width:280px;
+max-width:80%;
+margin-bottom:25px;
+animation:pulse 2s infinite;
+}
+
+#splash-screen h1{
+font-size:52px;
+color:#c63d7d;
+margin-bottom:10px;
+font-weight:800;
+}
+
+#splash-screen p{
+font-size:18px;
+color:#555;
+margin-bottom:25px;
+}
+
+.loading-bar{
+width:260px;
+height:10px;
+background:#eee;
+border-radius:20px;
+overflow:hidden;
+}
+
+.loading-progress{
+height:100%;
+width:0%;
+background:
+linear-gradient(
+90deg,
+#c63d7d,
+#8f1d55
+);
+animation:loading 2s forwards;
+}
+
+@keyframes loading{
+
+to{
+width:100%;
+}
+
+}
+
+@keyframes fadeOut{
+
+to{
+opacity:0;
+visibility:hidden;
+}
+
+}
+
+@keyframes pulse{
+
+0%{
+transform:scale(1);
+}
+
+50%{
+transform:scale(1.04);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
 </style>
 
 <link rel="manifest" href="manifest.json">
@@ -1607,6 +1717,26 @@ window.onSnapshot = onSnapshot;
 console.log("Firebase conectado correctamente");
 
 </script>
+
+
+<div id="splash-screen">
+
+<img src="icon.png" class="splash-logo">
+
+<h1>MS-DermaPath</h1>
+
+<p>
+Sistema Profesional Dermatopatológico
+</p>
+
+<div class="loading-bar">
+
+<div class="loading-progress"></div>
+
+</div>
+
+</div>
+
 
 </body>
 </html>

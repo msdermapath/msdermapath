@@ -1089,7 +1089,9 @@ function showHistory(){
 
 syncQuotesFromFirebase();
 
-historyModal.style.display='block';
+document.getElementById(
+'historyModal'
+).style.display='block';
 
 let history = JSON.parse(
 localStorage.getItem('ms_quotes') || '[]'
@@ -1499,7 +1501,9 @@ win.print();
 
 function closeHistory(){
 
-historyModal.style.display='none';
+document.getElementById(
+'historyModal'
+).style.display='none';
 
 }
 

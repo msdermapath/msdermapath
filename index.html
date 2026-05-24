@@ -514,17 +514,21 @@ transform:scale(1);
 
 <div id="splash-screen">
 
-<img src="icon.png" class="splash-logo">
+<div class="splash-content">
+
+<img src="logo.png" class="splash-logo">
 
 <h1>MS-DermaPath</h1>
 
 <p>
-Sistema Profesional Dermatopatológico
+Dermatología y Dermatopatología
 </p>
 
-<div class="loading-bar">
+<div class="loader"></div>
 
-<div class="loading-progress"></div>
+<div class="splash-footer">
+MS-DermaPath 2026 © Derechos reservados
+</div>
 
 </div>
 
@@ -1532,6 +1536,112 @@ color:#c63d7d;
 margin-top:50px;
 }
 
+#splash-screen{
+position:fixed;
+inset:0;
+background:linear-gradient(
+135deg,
+#fff5f9,
+#ffe3ef
+);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:99999;
+animation:fadeOut 1s ease forwards;
+animation-delay:2.5s;
+}
+
+.splash-content{
+text-align:center;
+padding:20px;
+animation:zoomIn 1.2s ease;
+}
+
+.splash-logo{
+width:180px;
+max-width:80%;
+margin-bottom:20px;
+filter:drop-shadow(
+0 10px 20px rgba(198,61,125,0.3)
+);
+}
+
+.splash-content h1{
+font-size:52px;
+color:#222;
+margin-bottom:10px;
+}
+
+.splash-content p{
+font-size:22px;
+color:#c63d7d;
+margin-bottom:30px;
+}
+
+.loader{
+width:220px;
+height:8px;
+background:#f3d1df;
+border-radius:20px;
+overflow:hidden;
+margin:auto;
+position:relative;
+}
+
+.loader::before{
+content:'';
+position:absolute;
+left:-50%;
+top:0;
+width:50%;
+height:100%;
+background:#c63d7d;
+animation:loading 2s linear forwards;
+border-radius:20px;
+}
+
+.splash-footer{
+margin-top:30px;
+font-size:15px;
+color:#777;
+}
+
+@keyframes loading{
+
+0%{
+left:-50%;
+}
+
+100%{
+left:100%;
+}
+
+}
+
+@keyframes fadeOut{
+
+to{
+opacity:0;
+visibility:hidden;
+}
+
+}
+
+@keyframes zoomIn{
+
+from{
+transform:scale(0.8);
+opacity:0;
+}
+
+to{
+transform:scale(1);
+opacity:1;
+}
+
+}
+
 @media print{
 table, tr, td, th, .info{
 break-inside: avoid;
@@ -1795,6 +1905,22 @@ window.doc = doc;
 window.onSnapshot = onSnapshot;
 
 console.log("Firebase conectado correctamente");
+
+</script>
+
+<script>
+
+window.addEventListener('load',()=>{
+
+setTimeout(()=>{
+
+document.getElementById(
+'splash-screen'
+).style.display='none';
+
+},3500);
+
+});
 
 </script>
 

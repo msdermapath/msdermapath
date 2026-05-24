@@ -19,6 +19,7 @@ body{
 background:#f5f6fa;
 padding:18px;
 color:#333;
+overflow-x:hidden;
 }
 
 .container{
@@ -37,6 +38,7 @@ box-shadow:0 10px 25px rgba(0,0,0,0.08);
 width:100%;
 max-width:1400px;
 margin:auto;
+overflow:hidden;
 }
 
 .header{
@@ -141,13 +143,17 @@ border-radius:14px;
 border:1px solid #e4c9d6;
 font-size:15px;
 width:100%;
+min-width:0;
+max-width:100%;
 }
 
 .search-grid{
 display:grid;
-grid-template-columns:2fr 1fr auto;
+grid-template-columns:minmax(0,2fr) minmax(0,1fr) auto;
 gap:12px;
 margin-bottom:18px;
+width:100%;
+overflow:hidden;
 }
 
 .price{
@@ -176,12 +182,12 @@ cursor:pointer;
 background:#a92e68;
 }
 
-
 table{
-page-break-inside: avoid;
-
 width:100%;
 border-collapse:collapse;
+display:block;
+overflow-x:auto;
+max-width:100%;
 }
 
 th{

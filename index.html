@@ -1745,7 +1745,8 @@ addDoc,
 getDocs,
 deleteDoc,
 doc,
-onSnapshot
+onSnapshot,
+enableIndexedDbPersistence
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -1760,6 +1761,18 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
+
+enableIndexedDbPersistence(db)
+.then(() => {
+
+console.log("Firestore offline activado");
+
+})
+.catch((err) => {
+
+console.log(err);
+
+});
 
 window.db = db;
 window.collection = collection;

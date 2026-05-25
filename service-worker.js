@@ -1,4 +1,4 @@
-const CACHE_NAME = "ms-dermapath-v25";
+const CACHE_NAME = "ms-dermapath-v26";
 
 const urlsToCache = [
 

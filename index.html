@@ -415,7 +415,12 @@ page-break-inside: avoid;
 #splash-screen{
 position:fixed;
 inset:0;
-background:white;
+background:
+linear-gradient(
+135deg,
+#fff,
+#fff5f9
+);
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -482,6 +487,16 @@ visibility:hidden;
 
 }
 
+.splash-footer{
+position:absolute;
+bottom:20px;
+left:20px;
+font-size:14px;
+color:#c63d7d;
+font-weight:600;
+opacity:0.8;
+}
+
 @keyframes pulse{
 
 0%{
@@ -509,18 +524,10 @@ transform:scale(1);
 
 <div id="splash-screen">
 
-<img src="logo completo circulo-01.png" class="splash-logo">
+<img src="logo-msdermapath.png" class="splash-logo">
 
-<h1>MS-DermaPath</h1>
-
-<p>
-Sistema Profesional Dermatopatológico
-</p>
-
-<div class="loading-bar">
-
-<div class="loading-progress"></div>
-
+<div class="splash-footer">
+MS-DermaPath © 2026 · Derechos Reservados
 </div>
 
 </div>

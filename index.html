@@ -47,7 +47,7 @@ display:flex;
 justify-content:center;
 align-items:center;
 position:relative;
-padding-bottom:20px;
+padding-bottom:0;
 border-bottom:2px solid #f1d4e0;
 flex-wrap:wrap;
 }
@@ -620,14 +620,41 @@ margin-bottom:10px;
 grid-template-columns:1fr;
 }
 
+.hero-banner{
+height:420px;
+margin-top:10px;
+margin-bottom:10px;
+border-radius:28px;
+overflow:hidden;
+}
+
+.banner-img{
+width:100%;
+height:100%;
+object-fit:cover;
+object-position:center top;
+display:block;
+}
+
 .grid,.search-grid{
 grid-template-columns:1fr;
 }
 
 .top-actions{
-position:static;
+position:absolute;
+top:18px;
+right:18px;
+margin-top:0;
+z-index:300;
+display:flex;
+align-items:center;
 justify-content:center;
-margin-top:20px;
+}
+
+.top-actions button{
+padding:10px 14px;
+font-size:13px;
+border-radius:12px;
 }
 
 .logo{
@@ -670,7 +697,13 @@ border-radius:18px;
 }
 
 .header{
-padding:10px;
+padding:0;
+padding-top:10px;
+align-items:flex-start;
+}
+
+.content{
+margin-top:0;
 }
 
 }

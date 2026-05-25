@@ -259,6 +259,114 @@ border:1px solid #ead0dc;
 background:#fafbfd;
 }
 
+.menu-btn{
+position:absolute;
+left:0;
+top:10px;
+background:#c63d7d;
+border:none;
+color:white;
+width:55px;
+height:55px;
+border-radius:18px;
+font-size:28px;
+cursor:pointer;
+box-shadow:0 6px 15px rgba(0,0,0,0.15);
+transition:0.3s;
+z-index:2001;
+}
+
+.menu-btn:hover{
+background:#a92e68;
+transform:scale(1.05);
+}
+
+.sidebar{
+position:fixed;
+top:0;
+left:-320px;
+width:300px;
+height:100%;
+background:white;
+box-shadow:8px 0 25px rgba(0,0,0,0.15);
+padding:25px;
+transition:0.4s;
+z-index:3000;
+display:flex;
+flex-direction:column;
+}
+
+.sidebar.active{
+left:0;
+}
+
+.sidebar-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+padding-bottom:15px;
+border-bottom:2px solid #f3d1df;
+}
+
+.sidebar-title{
+font-size:26px;
+font-weight:bold;
+color:#c63d7d;
+}
+
+.close-sidebar{
+background:#ffe7f1;
+border:none;
+width:40px;
+height:40px;
+border-radius:12px;
+cursor:pointer;
+font-size:20px;
+color:#c63d7d;
+font-weight:bold;
+}
+
+.sidebar-menu{
+display:flex;
+flex-direction:column;
+gap:18px;
+margin-top:10px;
+}
+
+.sidebar-menu button{
+background:#fff3f8;
+border:none;
+padding:18px;
+border-radius:18px;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;
+display:flex;
+align-items:center;
+gap:14px;
+color:#c63d7d;
+transition:0.3s;
+}
+
+.sidebar-menu button:hover{
+background:#c63d7d;
+color:white;
+transform:translateX(5px);
+}
+
+.sidebar-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.35);
+display:none;
+z-index:2500;
+}
+
+.sidebar-overlay.active{
+display:block;
+}
+
 .footer{
 margin-top:20px;
 background:#c63d7d;
@@ -530,11 +638,45 @@ Sistema Profesional Dermatopatológico
 
 </div>
 
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<div class="sidebar" id="sidebar">
+
+<div class="sidebar-header">
+
+<div class="sidebar-title">
+Menú
+</div>
+
+<button class="close-sidebar" onclick="closeSidebar()">
+✕
+</button>
+
+</div>
+
+<div class="sidebar-menu">
+
+<button onclick="newQuote()">
+🧾 Nueva Cotización
+</button>
+
+<button onclick="exitApp()">
+🚪 Salir
+</button>
+
+</div>
+
+</div>
+
 <div class="container">
 
 <div class="main-card">
 
 <div class="header">
+
+<button class="menu-btn" onclick="openSidebar()">
+☰
+</button>
 
 <div class="logo-section">
 
@@ -560,10 +702,6 @@ Atención integral con diagnósticos precisos y tratamientos personalizados para
 </div>
 
 <div class="top-actions">
-
-<button onclick="shareProgram()">
-Invitar Persona
-</button>
 
 <button onclick="showHistory()">
 Ver Historial
@@ -1795,6 +1933,59 @@ window.doc = doc;
 window.onSnapshot = onSnapshot;
 
 console.log("Firebase conectado correctamente");
+
+<script>
+
+function openSidebar(){
+
+document
+.getElementById("sidebar")
+.classList.add("active");
+
+document
+.getElementById("sidebarOverlay")
+.classList.add("active");
+
+}
+
+function closeSidebar(){
+
+document
+.getElementById("sidebar")
+.classList.remove("active");
+
+document
+.getElementById("sidebarOverlay")
+.classList.remove("active");
+
+}
+
+function newQuote(){
+
+if(confirm("¿Deseas iniciar una nueva cotización?")){
+
+location.reload();
+
+}
+
+}
+
+function exitApp(){
+
+if(confirm("¿Deseas salir de la aplicación?")){
+
+window.close();
+
+/* respaldo */
+setTimeout(()=>{
+
+location.href="about:blank";
+
+},500);
+
+}
+
+}
 
 </script>
 

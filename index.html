@@ -66,10 +66,9 @@ box-shadow:
 .banner-img{
 width:100%;
 max-width:100%;
-height:auto;
 display:block;
 margin:auto;
-object-fit:contain;
+object-fit:cover;
 border-radius:25px;
 }
 
@@ -642,7 +641,7 @@ grid-template-columns:1fr;
 }
 
 .hero-banner{
-min-height:320px;
+height:320px;
 margin-top:65px;
 margin-bottom:15px;
 border-radius:28px;
@@ -670,6 +669,24 @@ grid-template-columns:1fr;
 position:static;
 justify-content:center;
 margin-top:20px;
+}
+
+.top-history-btn{
+position:absolute;
+top:18px;
+right:18px;
+z-index:600;
+}
+
+.top-history-btn button{
+background:#c63d7d;
+color:white;
+border:none;
+padding:10px 18px;
+border-radius:14px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 4px 12px rgba(0,0,0,0.15);
 }
 
 .logo{
@@ -952,6 +969,8 @@ Todos los derechos reservados 2026
 </div>
 
 <div class="top-actions">
+
+<div class="top-history-btn">
 
 <button onclick="showHistory()">
 Ver Historial

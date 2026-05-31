@@ -133,7 +133,7 @@ font-weight:bold;
 
 .content{
 display:grid;
-grid-template-columns:3fr 1fr;
+grid-template-columns:2fr 1fr;
 gap:20px;
 margin-top:20px;
 }
@@ -220,11 +220,11 @@ max-width:100%;
 th{
 background:#c63d7d;
 color:white;
-padding:15px 50px;
+padding:15px;
 }
 
 td{
-padding:15px 50px;
+padding:15px;
 border-bottom:1px solid #f0dce5;
 text-align:center;
 }
@@ -1155,40 +1155,16 @@ Resumen
 $<span id="total">0.00</span>
 </h1>
 
-<div id="customIncreaseContainer"
-style="display:none;margin-top:15px;">
-
-<label>
-Ajuste de cotización para múltiples marcadores
-<br>
-<small>(6 o más)</small>
-</label>
-
-<input
-type="number"
-id="customIncrease"
-value="10"
-min="0"
-step="0.01"
-oninput="render()"
-style="
-width:100%;
-padding:10px;
-margin-top:8px;
-border:1px solid #ddd;
-border-radius:10px;
-text-align:center;
-font-size:18px;
-">
-
-</div>
-
 </div>
 
 <div class="action-list">
 
 <button onclick="sendWhatsApp()">
 Enviar WhatsApp
+</button>
+
+<button onclick="saveQuote()">
+Guardar Cotización
 </button>
 
 <button onclick="showHistory()">
@@ -1417,16 +1393,19 @@ price.innerHTML='$0.00';
 
 function getIncreasePerMarker(count){
 
-if(count >= 1 && count <= 5){
+if(count <= 1){
+return 30;
+}
+
+if(count === 2){
+return 15;
+}
+
+if(count >= 3){
 return 10;
 }
 
-const customIncrease =
-parseFloat(
-document.getElementById('customIncrease')?.value
-) || 0;
-
-return customIncrease / count;
+return 0;
 
 }
 
@@ -1435,19 +1414,6 @@ function render(){
 table.innerHTML='';
 
 const increasePerMarker = getIncreasePerMarker(selected.length);
-
-const customContainer =
-document.getElementById('customIncreaseContainer');
-
-if(selected.length >= 6){
-
-customContainer.style.display = 'block';
-
-}else{
-
-customContainer.style.display = 'none';
-
-}
 
 let totalBase = 0;
 let totalIncrease = 0;
@@ -1539,21 +1505,15 @@ const finalPrice = m.price + increasePerMarker;
 
 finalTotal += finalPrice;
 
-if(selected.length <= 5){
-text += `${m.name} — $${finalPrice.toFixed(2)} USD\n`;
-}else{
-text += `${m.name}\n`;
-}
+text+=`${m.name} — $${finalPrice.toFixed(2)} USD
+`;
 
 });
 
-text += `\n`;
+text+=`
+TOTAL: $${finalTotal.toFixed(2)} USD
 
-if(selected.length <= 5){
-text += `TOTAL: $${finalTotal.toFixed(2)} USD\n\n`;
-}else{
-text += `VALOR TOTAL: $${finalTotal.toFixed(2)} USD\n\n`;
-}
+`;
 
 text+=`Quedamos atentos a cualquier consulta o información adicional.
 
@@ -1574,16 +1534,7 @@ paciente.addEventListener('input',generateMessage);
 caso.addEventListener('input',generateMessage);
 fecha.addEventListener('input',generateMessage);
 
-syncQuotesFromFirebase();
-
 function sendWhatsApp(){
-
-if(selected.length===0){
-alert('Debe agregar marcadores');
-return;
-}
-
-saveQuote();
 
 window.open(
 `https://wa.me/?text=${generateMessage()}`
@@ -1627,8 +1578,6 @@ const totalIncrease = increasePerMarker * selected.length;
 
 const finalTotal = total + totalIncrease;
 
-const savedId = Date.now().toString();
-
 history.push({
 empresa:empresa.value,
 paciente:paciente.value,
@@ -1638,8 +1587,7 @@ totalBase:total,
 totalIncrease:totalIncrease,
 finalTotal:finalTotal,
 markers:selected,
-estado:"PENDIENTE",
-saved:savedId
+saved: Date.now().toString()
 });
 
 saveQuoteFirebase({
@@ -1651,8 +1599,7 @@ totalBase:total,
 totalIncrease:totalIncrease,
 finalTotal:finalTotal,
 markers:selected,
-estado:"PENDIENTE",
-saved:savedId
+saved:new Date().toISOString()
 });
 
 localStorage.setItem(
@@ -1704,6 +1651,8 @@ error
 
 
 function showHistory(){
+
+syncQuotesFromFirebase();
 
 document.getElementById(
 'historyModal'
@@ -1805,12 +1754,7 @@ section += `
 <b>Paciente:</b> ${q.paciente}<br>
 <b>Caso:</b> ${q.caso}<br>
 <b>Empresa:</b> ${q.empresa}<br>
-<b>Fecha:</b> ${q.fecha || ''}<br>
-
-<b>Estado:</b>
-${q.estado === "APROBADO"
-? "🟢 APROBADO"
-: "🟡 PENDIENTE"}
+<b>Fecha:</b> ${q.fecha || ''}
 </div>
 
 <div style="display:flex;flex-direction:column;gap:10px;align-items:end;">
@@ -1819,31 +1763,9 @@ ${q.estado === "APROBADO"
 $${(q.finalTotal || q.total || 0).toFixed(2)}
 </div>
 
-${(q.estado || "PENDIENTE")==="PENDIENTE"
-?
-`
-<button class="export-btn"
-onclick="approveQuote('${q.saved}')">
-Aprobar
-</button>
-
-<button class="delete-btn"
-onclick="deleteHistoryItem('${q.saved}')">
-No aprobado
-</button>
-`
-:
-`
-<div style="font-weight:bold;color:green;">
-✓ APROBADO
-</div>
-
-<button class="delete-btn"
-onclick="deleteHistoryItem('${q.saved}')">
+<button class="delete-btn" onclick="deleteHistoryItem('${q.saved}')">
 Eliminar
 </button>
-`
-}
 
 </div>
 
@@ -2142,33 +2064,6 @@ win.print();
 
 
 
-async function approveQuote(savedId){
-
-const querySnapshot = await getDocs(
-collection(db,"cotizaciones")
-);
-
-querySnapshot.forEach(async(documento)=>{
-
-const data = documento.data();
-
-if(data.saved===savedId){
-
-await updateDoc(
-doc(db,"cotizaciones",documento.id),
-{
-estado:"APROBADO"
-}
-);
-
-}
-
-});
-
-showHistory();
-
-}
-
 function closeHistory(){
 
 document.getElementById(
@@ -2249,7 +2144,6 @@ collection,
 addDoc,
 getDocs,
 deleteDoc,
-updateDoc,
 doc,
 onSnapshot,
 enableIndexedDbPersistence
@@ -2284,7 +2178,7 @@ window.db = db;
 window.collection = collection;
 window.addDoc = addDoc;
 window.getDocs = getDocs;
-window.updateDoc = updateDoc;
+window.deleteDoc = deleteDoc;
 window.doc = doc;
 window.onSnapshot = onSnapshot;
 

@@ -1574,6 +1574,8 @@ paciente.addEventListener('input',generateMessage);
 caso.addEventListener('input',generateMessage);
 fecha.addEventListener('input',generateMessage);
 
+syncQuotesFromFirebase();
+
 function sendWhatsApp(){
 
 if(selected.length===0){
@@ -1700,8 +1702,6 @@ error
 
 
 function showHistory(){
-
-syncQuotesFromFirebase();
 
 document.getElementById(
 'historyModal'

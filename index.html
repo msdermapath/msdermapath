@@ -1627,6 +1627,8 @@ const totalIncrease = increasePerMarker * selected.length;
 
 const finalTotal = total + totalIncrease;
 
+const savedId = Date.now().toString();
+
 history.push({
 empresa:empresa.value,
 paciente:paciente.value,
@@ -1637,7 +1639,7 @@ totalIncrease:totalIncrease,
 finalTotal:finalTotal,
 markers:selected,
 estado:"PENDIENTE",
-saved: Date.now().toString()
+saved:savedId
 });
 
 saveQuoteFirebase({
@@ -1650,7 +1652,7 @@ totalIncrease:totalIncrease,
 finalTotal:finalTotal,
 markers:selected,
 estado:"PENDIENTE",
-saved:new Date().toISOString()
+saved:savedId
 });
 
 localStorage.setItem(

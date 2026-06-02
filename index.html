@@ -1632,6 +1632,7 @@ totalBase:total,
 totalIncrease:totalIncrease,
 finalTotal:finalTotal,
 markers:selected,
+estado:'Pendiente',
 saved: Date.now().toString()
 });
 
@@ -1799,7 +1800,17 @@ section += `
 <b>Paciente:</b> ${q.paciente}<br>
 <b>Caso:</b> ${q.caso}<br>
 <b>Empresa:</b> ${q.empresa}<br>
-<b>Fecha:</b> ${q.fecha || ''}
+<b>Fecha:</b> ${q.fecha || ''}<br>
+
+<b>Estado:</b>
+
+${
+q.estado === 'Aprobado'
+?
+'<span style="color:green;font-weight:bold;">APROBADO</span>'
+:
+'<span style="color:#d97706;font-weight:bold;">PENDIENTE</span>'
+}
 </div>
 
 <div style="display:flex;flex-direction:column;gap:10px;align-items:end;">
@@ -1808,7 +1819,24 @@ section += `
 $${(q.finalTotal || q.total || 0).toFixed(2)}
 </div>
 
-<button class="delete-btn" onclick="deleteHistoryItem('${q.saved}')">
+<button
+class="delete-btn"
+onclick="approveQuote('${q.saved}')"
+style="${q.estado==='Aprobado' ? 'display:none;' : ''}">
+Aprobar
+</button>
+
+<button
+class="delete-btn"
+onclick="rejectQuote('${q.saved}')"
+style="${q.estado==='Aprobado' ? 'display:none;' : ''}">
+No aprobado
+</button>
+
+<button
+class="delete-btn"
+onclick="deleteHistoryItem('${q.saved}')"
+style="${q.estado==='Aprobado' ? '' : 'display:none;'}">
 Eliminar
 </button>
 
@@ -1859,6 +1887,67 @@ historyContent.innerHTML += section;
 
 }
 
+async function approveQuote(savedId){
+
+let history = JSON.parse(
+localStorage.getItem('ms_quotes') || '[]'
+);
+
+history = history.map(q=>{
+
+if(q.saved === savedId){
+
+q.estado = 'Aprobado';
+
+}
+
+return q;
+
+});
+
+localStorage.setItem(
+'ms_quotes',
+JSON.stringify(history)
+);
+
+const querySnapshot = await getDocs(
+collection(db,"cotizaciones")
+);
+
+querySnapshot.forEach(async (documento)=>{
+
+const data = documento.data();
+
+if(data.saved === savedId){
+
+await updateDoc(
+doc(db,"cotizaciones",documento.id),
+{
+estado:'Aprobado'
+}
+);
+
+}
+
+});
+
+showHistory();
+
+}
+
+function rejectQuote(savedId){
+
+if(
+!confirm(
+'¿Eliminar esta cotización no aprobada?'
+)
+){
+return;
+}
+
+deleteHistoryItem(savedId);
+
+}
 
 async function deleteHistoryItem(savedId){
 
@@ -2189,6 +2278,7 @@ collection,
 addDoc,
 getDocs,
 deleteDoc,
+updateDoc,
 doc,
 onSnapshot,
 enableIndexedDbPersistence

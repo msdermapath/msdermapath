@@ -1155,16 +1155,28 @@ Resumen
 $<span id="total">0.00</span>
 </h1>
 
+<div id="manualContainer" style="display:none;margin-top:15px;">
+
+<label style="font-weight:bold;">
+Valor Manual
+</label>
+
+<input
+type="number"
+id="manualIncrease"
+placeholder="Ingrese valor total"
+oninput="render()"
+style="margin-top:10px;"
+>
+
+</div>
+
 </div>
 
 <div class="action-list">
 
 <button onclick="sendWhatsApp()">
 Enviar WhatsApp
-</button>
-
-<button onclick="saveQuote()">
-Guardar Cotización
 </button>
 
 <button onclick="showHistory()">
@@ -1393,27 +1405,41 @@ price.innerHTML='$0.00';
 
 function getIncreasePerMarker(count){
 
-if(count <= 1){
-return 30;
-}
-
-if(count === 2){
-return 15;
-}
-
-if(count >= 3){
+if(count <= 5){
 return 10;
 }
 
-return 0;
+const manualValue =
+parseFloat(
+document.getElementById('manualIncrease')?.value || 0
+);
+
+return count > 0
+? manualValue / count
+: 0;
 
 }
+
 
 function render(){
 
 table.innerHTML='';
 
 const increasePerMarker = getIncreasePerMarker(selected.length);
+
+if(selected.length >= 6){
+
+document.getElementById(
+'manualContainer'
+).style.display='block';
+
+}else{
+
+document.getElementById(
+'manualContainer'
+).style.display='none';
+
+}
 
 let totalBase = 0;
 let totalIncrease = 0;
@@ -1501,12 +1527,22 @@ let finalTotal = 0;
 
 selected.forEach((m)=>{
 
-const finalPrice = m.price + increasePerMarker;
+const finalPrice =
+m.price + increasePerMarker;
 
 finalTotal += finalPrice;
 
+if(selected.length <= 5){
+
 text+=`${m.name} — $${finalPrice.toFixed(2)} USD
 `;
+
+}else{
+
+text+=`${m.name}
+`;
+
+}
 
 });
 
@@ -1535,6 +1571,15 @@ caso.addEventListener('input',generateMessage);
 fecha.addEventListener('input',generateMessage);
 
 function sendWhatsApp(){
+
+if(selected.length===0){
+
+alert('Debe agregar marcadores');
+return;
+
+}
+
+saveQuote();
 
 window.open(
 `https://wa.me/?text=${generateMessage()}`

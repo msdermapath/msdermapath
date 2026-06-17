@@ -582,9 +582,20 @@ z-index:1000;
 .modal-content{
 background:white;
 max-width:1200px;
+width:95%;
 margin:auto;
 padding:25px;
 border-radius:25px;
+}
+
+@media(max-width:768px){
+
+.modal-content{
+width:98%;
+padding:12px;
+border-radius:18px;
+}
+
 }
 
 .month-box{
@@ -600,9 +611,10 @@ width:95%;
 }
 
 .month-title{
-font-size:28px;
+font-size:20px;
+font-weight:600;
 color:#c63d7d;
-margin-bottom:15px;
+margin-bottom:8px;
 }
 
 .quote-box{
@@ -828,6 +840,271 @@ transform:scale(1);
 
 }
 
+.payment-options{
+display:flex;
+flex-direction:column;
+gap:12px;
+margin:20px 0;
+}
+
+.payment-card{
+display:flex;
+align-items:center;
+justify-content:center;
+padding:16px;
+border:2px solid #e7d5dd;
+border-radius:14px;
+cursor:pointer;
+font-weight:700;
+font-size:16px;
+background:white;
+transition:.25s;
+text-align:center;
+}
+
+.payment-card input{
+display:none;
+}
+
+.payment-card:hover{
+background:#fff4f8;
+border-color:#c63d7d;
+}
+
+.payment-card.selected{
+background:#f5b8d0;
+border-color:#e58ab0;
+color:#8f1d55;
+box-shadow:0 6px 16px rgba(229,138,176,.25);
+}
+
+.payment-card.selected span::before{
+content:"✓ ";
+font-weight:bold;
+}
+
+.payment-title{
+text-align:center;
+margin-bottom:25px;
+}
+
+#paymentDate{
+width:100%;
+padding:10px;
+border:1px solid #ddd;
+border-radius:8px;
+margin-top:8px;
+font-size:16px;
+}
+
+.payment-actions{
+display:flex;
+gap:12px;
+margin-top:25px;
+justify-content:center;
+}
+
+.payment-actions button{
+width:180px;
+max-width:100%;
+}
+
+.payment-cancel-btn{
+background:#f3f4f6;
+color:#555;
+border:none;
+padding:14px;
+font-size:16px;
+font-weight:bold;
+border-radius:10px;
+cursor:pointer;
+transition:.25s;
+}
+
+.payment-cancel-btn:hover{
+background:#e5e7eb;
+}
+
+.payment-save-btn{
+padding:14px;
+font-size:16px;
+font-weight:bold;
+border:none;
+border-radius:10px;
+background:#c63d7d;
+color:white;
+cursor:pointer;
+margin-top:0;
+}
+
+.payment-actions{
+display:flex;
+gap:12px;
+margin-top:20px;
+}
+
+.payment-actions button{
+flex:1;
+}
+
+.payment-cancel-btn{
+background:#f3f4f6;
+color:#555;
+border:none;
+padding:14px;
+font-size:16px;
+font-weight:bold;
+border-radius:10px;
+cursor:pointer;
+transition:.25s;
+}
+
+.payment-cancel-btn:hover{
+background:#e5e7eb;
+}
+
+.payment-save-btn{
+margin-top:0;
+}
+
+.quote-card{
+background:#fff;
+border:1px solid #f1d7e4;
+border-radius:16px;
+padding:16px;
+margin-top:12px;
+box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+
+.quote-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:10px;
+}
+
+.quote-patient{
+font-size:17px;
+font-weight:700;
+color:#2f3a5c;
+}
+
+.quote-case{
+font-size:13px;
+color:#7a7a7a;
+margin-top:4px;
+}
+
+.status-badge{
+display:inline-flex;
+align-items:center;
+padding:6px 12px;
+border-radius:999px;
+font-size:12px;
+font-weight:700;
+}
+
+.status-pending{
+background:#fff4cc;
+color:#9a6b00;
+}
+
+.status-approved{
+background:#dff6e5;
+color:#1d7a43;
+}
+
+.status-paid{
+background:#fde8f1;
+color:#c63d7d;
+}
+
+.status-lab{
+background:#fce7f3;
+color:#be185d;
+}
+
+.quote-values{
+display:flex;
+gap:20px;
+margin-top:12px;
+font-size:14px;
+flex-wrap:wrap;
+}
+
+.quote-actions{
+display:flex;
+gap:8px;
+margin-top:14px;
+flex-wrap:wrap;
+}
+
+.action-btn{
+background:white;
+border:1px solid #c63d7d;
+color:#c63d7d;
+border-radius:10px;
+padding:10px 14px;
+font-weight:600;
+cursor:pointer;
+font-size:14px;
+min-height:42px;
+}
+
+.action-btn:hover{
+background:#fff5fa;
+}
+
+.btn-primary{
+background:white;
+border:1px solid #c63d7d;
+color:#c63d7d;
+}
+
+.btn-outline{
+background:white;
+border:1px solid #c63d7d;
+color:#c63d7d;
+}
+
+.btn-danger{
+background:white;
+border:1px solid #c63d7d;
+color:#c63d7d;
+}
+@media(max-width:768px){
+
+.section-title{
+font-size:18px;
+line-height:1.2;
+margin-bottom:12px;
+}
+
+.quote-patient{
+font-size:18px;
+line-height:1.15;
+}
+
+.quote-case{
+font-size:15px;
+}
+
+.quote-values{
+justify-content:space-between;
+}
+
+.quote-actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+}
+
+.quote-actions button:first-child{
+grid-column:1 / span 2;
+}
+
+}
+
 </style>
 
 <link rel="manifest" href="manifest.json">
@@ -1001,7 +1278,7 @@ Cotización de inmunohistoquímica
 
 <datalist id="markers">
 <option value="ACTH">
-<option value="ACTINA ( MUSCULO LISO)">
+<option value="ACTINA (MUSCULO LISO)">
 <option value="AFP (ALFA FETO PROTEINA)">
 <option value="ALFA-1-ANTI TRIPSINA">
 <option value="ALFA-INHIBINA">
@@ -1016,7 +1293,7 @@ Cotización de inmunohistoquímica
 <option value="CALCITONINA">
 <option value="CALDESMON">
 <option value="CALRETININA">
-<option value="CD 68">
+<option value="CD68">
 <option value="CD10">
 <option value="CD117">
 <option value="CD138">
@@ -1056,10 +1333,10 @@ Cotización de inmunohistoquímica
 <option value="CK8/18">
 <option value="COLAGENO IV">
 <option value="CROMOGRANINA A.">
-<option value="D2 - 40">
+<option value="D2-40">
 <option value="DESMINA">
 <option value="DOG-1">
-<option value="E - CADHERINA">
+<option value="E-CADHERINA">
 <option value="EBV (EPSTEIN BARR VIRUS)">
 <option value="EGFR">
 <option value="EMA">
@@ -1079,7 +1356,7 @@ Cotización de inmunohistoquímica
 <option value="IGG">
 <option value="IGM">
 <option value="KAPPA">
-<option value="KI 67">
+<option value="KI67">
 <option value="LAMBDA">
 <option value="LH">
 <option value="MAMAGLOBINA">
@@ -1197,6 +1474,10 @@ Enviar WhatsApp
 Historial Mensual
 </button>
 
+<button onclick="clearForm()">
+Nueva Cotización
+</button>
+
 </div>
 
 </div>
@@ -1223,7 +1504,96 @@ Cerrar
 Historial Mensual de Cotizaciones
 </h2>
 
+<input
+type="text"
+id="historySearch"
+placeholder="🔍 Buscar paciente, caso, empresa o fecha"
+oninput="filterHistory();showSuggestions();"
+autocomplete="off"
+style="
+width:100%;
+margin-bottom:5px;
+padding:12px;
+border:1px solid #ddd;
+border-radius:8px;
+font-size:15px;
+">
+
+<div
+id="searchSuggestions"
+style="
+background:white;
+border:1px solid #ddd;
+border-radius:8px;
+margin-bottom:15px;
+display:none;
+max-height:220px;
+overflow:auto;
+">
+</div>
+
 <div id="historyContent"></div>
+
+</div>
+
+</div>
+<div class="modal" id="paymentModal">
+
+<div class="modal-content" style="max-width:500px;">
+
+<h2 class="section-title payment-title">
+Registrar Pago
+</h2>
+
+<input type="hidden" id="paymentSavedId">
+
+<div class="payment-options">
+
+<label class="payment-card" data-method="Efectivo">
+<input type="radio" name="paymentMethod" value="Efectivo">
+<span>Efectivo</span>
+</label>
+
+<label class="payment-card" data-method="Transferencia">
+<input type="radio" name="paymentMethod" value="Transferencia">
+<span>Transferencia</span>
+</label>
+
+<label class="payment-card" data-method="Depósito">
+<input type="radio" name="paymentMethod" value="Depósito">
+<span>Depósito</span>
+</label>
+
+</div>
+
+<label>
+
+Fecha de pago
+
+<input
+type="date"
+id="paymentDate"
+style="margin-top:8px;">
+
+</label>
+
+<br><br>
+
+<div class="payment-actions">
+
+<button
+class="payment-cancel-btn"
+onclick="closePaymentModal()">
+Cancelar
+</button>
+
+<button
+class="payment-save-btn"
+onclick="savePayment()">
+Guardar Pago
+</button>
+
+</div>
 
 </div>
 
@@ -1232,7 +1602,7 @@ Historial Mensual de Cotizaciones
 <script>
 
 const prices = {
-  "ACTINA ( MUSCULO LISO)": 28.0,
+  "ACTINA (MUSCULO LISO)": 28.0,
   "ACTH": 26.0,
   "AFP (ALFA FETO PROTEINA)": 28.0,
   "ALFA-1-ANTI TRIPSINA": 28.0,
@@ -1269,12 +1639,12 @@ const prices = {
   "CD45 LCA": 28.0,
   "CD56": 28.0,
   "CD57": 26.0,
-  "CD 68": 28.0,
+  "CD68": 28.0,
   "CD79Α": 28.0,
   "CD99": 26.0,
   "CD117": 30.0,
   "CD138": 28.0,
-  "CDX 2": 28.0,
+  "CDX2": 28.0,
   "CEA": 30.0,
   "CICLINA D1": 28.0,
   "CK DE ALTO PESO MOLECULAR": 26.0,
@@ -1289,11 +1659,11 @@ const prices = {
   "COLAGENO IV": 28.0,
   "CROMOGRANINA A.": 30.0,
   "DESMINA": 26.0,
-  "D2 - 40": 30.0,
+  "D2-40": 30.0,
   "DOG-1": 28.0,
   "EMA": 26.0,
   "EGFR": 30.0,
-  "E - CADHERINA": 28.0,
+  "E-CADHERINA": 28.0,
   "ESTROGENOS": 28.0,
   "EBV (EPSTEIN BARR VIRUS)": 28.0,
   "FACTOR VIII": 30.0,
@@ -1353,6 +1723,8 @@ const prices = {
 let selected = [];
 let total = 0;
 
+let quoteAlreadySaved = false;
+
 marker.addEventListener('input',()=>{
 
 const val = marker.value.toUpperCase();
@@ -1365,6 +1737,8 @@ price.innerHTML = prices[val]
 
 
 function addMarker(){
+
+quoteAlreadySaved = false;
 
 if(!empresa.value.trim()){
 alert('Debe ingresar el nombre de la empresa');
@@ -1510,15 +1884,13 @@ generateMessage();
 
 function removeMarker(i){
 
+quoteAlreadySaved = false;
+
 selected.splice(i,1);
 
 render();
 
 }
-
-
-
-
 
 
 function generateMessage(){
@@ -1579,10 +1951,25 @@ return encodeURIComponent(text);
 
 
 
-empresa.addEventListener('input',generateMessage);
-paciente.addEventListener('input',generateMessage);
-caso.addEventListener('input',generateMessage);
-fecha.addEventListener('input',generateMessage);
+empresa.addEventListener('input',()=>{
+quoteAlreadySaved = false;
+generateMessage();
+});
+
+paciente.addEventListener('input',()=>{
+quoteAlreadySaved = false;
+generateMessage();
+});
+
+caso.addEventListener('input',()=>{
+quoteAlreadySaved = false;
+generateMessage();
+});
+
+fecha.addEventListener('input',()=>{
+quoteAlreadySaved = false;
+generateMessage();
+});
 
 function sendWhatsApp(){
 
@@ -1593,7 +1980,33 @@ return;
 
 }
 
+if(
+!confirm(
+`Confirmar envío de cotización
+
+La cotización será guardada en el historial y se abrirá WhatsApp con el mensaje generado.
+
+Verifique que:
+✓ Paciente
+✓ Caso
+✓ Empresa
+✓ Marcadores
+
+sean correctos antes de continuar.
+
+¿Desea continuar?`
+)
+){
+return;
+}
+
+if(!quoteAlreadySaved){
+
 saveQuote();
+
+quoteAlreadySaved = true;
+
+}
 
 window.open(
 `https://wa.me/?text=${generateMessage()}`
@@ -1642,11 +2055,21 @@ empresa:empresa.value,
 paciente:paciente.value,
 caso:caso.value,
 fecha:fecha.value,
+
 totalBase:total,
 totalIncrease:totalIncrease,
 finalTotal:finalTotal,
+
+increasePerMarker: increasePerMarker,
+
 markers:selected,
+
 estado:'Pendiente',
+
+estadoPago:'Sin registrar',
+metodoPago:'',
+fechaPago:'',
+
 saved: Date.now().toString()
 });
 
@@ -1655,10 +2078,21 @@ empresa:empresa.value,
 paciente:paciente.value,
 caso:caso.value,
 fecha:fecha.value,
+
 totalBase:total,
 totalIncrease:totalIncrease,
 finalTotal:finalTotal,
+
+increasePerMarker: increasePerMarker,
+
 markers:selected,
+
+estado:'Pendiente',
+
+estadoPago:'Sin registrar',
+metodoPago:'',
+fechaPago:'',
+
 saved:new Date().toISOString()
 });
 
@@ -1751,6 +2185,30 @@ historyContent.innerHTML='';
 
 for(const month in grouped){
 
+const monthId =
+'month_' + month.replace('-','_');
+
+const monthNames = {
+'01':'Enero',
+'02':'Febrero',
+'03':'Marzo',
+'04':'Abril',
+'05':'Mayo',
+'06':'Junio',
+'07':'Julio',
+'08':'Agosto',
+'09':'Septiembre',
+'10':'Octubre',
+'11':'Noviembre',
+'12':'Diciembre'
+};
+
+const year = month.substring(0,4);
+const monthNumber = month.substring(5,7);
+
+const monthLabel =
+monthNames[monthNumber] + ' ' + year;
+
 let monthTotal = 0;
 
 let section = `
@@ -1762,8 +2220,15 @@ align-items:center;
 flex-wrap:wrap;
 gap:10px;">
 
-<h2 class="month-title">
-${month}
+<h2
+class="month-title"
+onclick="toggleMonth('${monthId}')"
+style="
+cursor:pointer;
+user-select:none;
+">
+▶ ${monthLabel}
+(${grouped[month].length})
 </h2>
 
 <div style="display:flex;gap:10px;flex-wrap:wrap;">
@@ -1775,9 +2240,19 @@ onclick="exportPDFMonth('${month}')">
 Exportar PDF
 </button>
 
+<button
+class="delete-btn"
+onclick="deleteMonth('${month}')">
+Eliminar mes
+</button>
+
 </div>
 
 </div>
+
+<section
+id="${monthId}"
+style="display:none;">
 `;
 
 grouped[month].forEach(q=>{
@@ -1786,11 +2261,19 @@ monthTotal += (q.totalBase || q.total || 0);
 
 let items='';
 
-const increasePerMarker = getIncreasePerMarker(q.markers.length);
+let totalBase = 0;
+let totalIncrease = 0;
+let totalFinal = 0;
+
+const increasePerMarker = q.increasePerMarker || 0;
 
 q.markers.forEach((m,index)=>{
 
 const finalPrice = m.price + increasePerMarker;
+
+totalBase += Number(m.price);
+totalIncrease += increasePerMarker;
+totalFinal += finalPrice;
 
 items += `
 <tr>
@@ -1806,6 +2289,184 @@ items += `
 });
 
 section += `
+
+<div
+class="quote-card quote-summary"
+data-search="${(
+q.caso + ' ' +
+q.paciente + ' ' +
+q.empresa + ' ' +
+(q.fecha || '')
+).toLowerCase()}"
+onclick="toggleHistoryDetail('${month}_${q.saved}')"
+>
+
+<div class="quote-header">
+
+<div>
+
+<div class="quote-patient">
+${q.paciente}
+</div>
+
+<div class="quote-case">
+Caso: ${q.caso}
+</div>
+
+</div>
+
+<div>
+
+${
+q.estado === 'Aprobado'
+?
+`
+<div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;">
+
+<span class="status-badge status-approved">
+🟢 Aprobada
+</span>
+
+${
+q.estadoPago === 'Pagado'
+?
+`
+<span class="status-badge status-paid">
+💰 Pagado
+</span>
+`
+:
+''
+}
+
+${
+q.fechaEnvioLaboratorio
+?
+`
+<span class="status-badge status-lab">
+🧪 Enviado
+</span>
+`
+:
+''
+}
+
+</div>
+`
+:
+`
+<span class="status-badge status-pending">
+🟡 Pendiente
+</span>
+`
+}
+
+</div>
+
+</div>
+
+<div class="quote-values">
+
+<div>
+<b>Base:</b>
+$${(q.totalBase || q.total || 0).toFixed(2)}
+</div>
+
+<div>
+<b>Final:</b>
+$${(q.finalTotal || q.total || 0).toFixed(2)}
+</div>
+
+</div>
+
+<div class="quote-actions">
+
+<button
+class="action-btn btn-outline"
+onclick="
+event.stopPropagation();
+toggleHistoryDetail('${month}_${q.saved}');
+">
+👁 Ver detalle
+</button>
+
+${
+q.estado !== 'Aprobado'
+?
+`
+<button
+class="action-btn btn-primary"
+onclick="
+event.stopPropagation();
+approveQuote('${q.saved}');
+">
+Aprobar
+</button>
+
+<button
+class="action-btn btn-danger"
+onclick="
+event.stopPropagation();
+rejectQuote('${q.saved}');
+">
+No aprobado
+</button>
+`
+:
+`
+${
+q.estadoPago !== 'Pagado'
+?
+`
+<button
+class="action-btn btn-primary"
+onclick="
+event.stopPropagation();
+registerPayment('${q.saved}');
+">
+Pago
+</button>
+`
+:
+''
+}
+
+${
+!q.fechaEnvioLaboratorio
+?
+`
+<button
+class="action-btn btn-outline"
+onclick="
+event.stopPropagation();
+sendToLab('${q.saved}');
+">
+Laboratorio
+</button>
+`
+:
+''
+}
+
+<button
+class="action-btn btn-danger"
+onclick="
+event.stopPropagation();
+deleteHistoryItem('${q.saved}');
+">
+Eliminar
+</button>
+`
+}
+
+</div>
+
+</div>
+
+<div
+id="${month}_${q.saved}"
+style="display:none;">
+
 <div class="quote-box">
 
 <div class="quote-header">
@@ -1825,6 +2486,49 @@ q.estado === 'Aprobado'
 :
 '<span style="color:#d97706;font-weight:bold;">PENDIENTE</span>'
 }
+
+<br><br>
+
+<b>Pago:</b>
+
+${
+q.estadoPago === 'Pagado'
+?
+`<span style="color:green;font-weight:bold;">
+PAGADO
+</span>
+<br>
+<b>Método:</b> ${q.metodoPago}
+<br>
+<b>Fecha pago:</b> ${q.fechaPago}`
+:
+`<span style="color:#d97706;font-weight:bold;">
+SIN REGISTRAR
+</span>`
+}
+
+<br><br>
+
+<b>Laboratorio:</b>
+
+${
+q.fechaEnvioLaboratorio
+?
+`
+<span style="color:#be185d;font-weight:bold;">
+ENVIADO
+</span>
+<br>
+<b>Fecha envío:</b> ${q.fechaEnvioLaboratorio}
+`
+:
+`
+<span style="color:#d97706;font-weight:bold;">
+PENDIENTE DE ENVÍO
+</span>
+`
+}
+
 </div>
 
 <div style="display:flex;flex-direction:column;gap:10px;align-items:end;">
@@ -1854,6 +2558,34 @@ style="${q.estado==='Aprobado' ? '' : 'display:none;'}">
 Eliminar
 </button>
 
+<button
+class="delete-btn"
+onclick="registerPayment('${q.saved}')"
+style="${
+q.estado==='Aprobado' &&
+q.estadoPago!=='Pagado'
+?
+''
+:
+'display:none;'
+}">
+Registrar pago
+</button>
+
+<button
+class="delete-btn"
+onclick="sendToLab('${q.saved}')"
+style="${
+q.estado==='Aprobado' &&
+!q.fechaEnvioLaboratorio
+?
+''
+:
+'display:none;'
+}">
+Enviar al laboratorio
+</button>
+
 </div>
 
 </div>
@@ -1876,7 +2608,36 @@ Eliminar
 ${items}
 </tbody>
 
+<tfoot>
+
+<tr style="
+font-weight:bold;
+background:#fff3f8;
+">
+
+<td colspan="2">
+TOTAL
+</td>
+
+<td>
+$${totalBase.toFixed(2)}
+</td>
+
+<td>
+$${totalIncrease.toFixed(2)}
+</td>
+
+<td>
+$${totalFinal.toFixed(2)}
+</td>
+
+</tr>
+
+</tfoot>
+
 </table>
+
+</div>
 
 </div>
 `;
@@ -1892,12 +2653,119 @@ Total del mes precio base
 $${monthTotal.toFixed(2)}
 </div>
 
+</section>
+
 </div>
 `;
 
 historyContent.innerHTML += section;
 
 }
+
+}
+
+function registerPayment(savedId){
+
+document.getElementById('paymentSavedId').value =
+savedId;
+
+document.getElementById('paymentDate').value =
+new Date().toISOString().split('T')[0];
+
+document
+.querySelectorAll('input[name="paymentMethod"]')
+.forEach(r=>r.checked=false);
+
+document.getElementById('paymentModal').style.display =
+'flex';
+
+}
+
+function closePaymentModal(){
+
+document.getElementById('paymentModal').style.display =
+'none';
+
+}
+
+async function savePayment(){
+
+const savedId =
+document.getElementById('paymentSavedId').value;
+
+const methodSelected =
+document.querySelector(
+'input[name="paymentMethod"]:checked'
+);
+
+if(!methodSelected){
+
+alert('Seleccione un método de pago');
+return;
+
+}
+
+const metodo = methodSelected.value;
+
+const fechaPago =
+document.getElementById('paymentDate').value;
+
+if(!fechaPago){
+
+alert('Seleccione la fecha de pago');
+return;
+
+}
+
+let history = JSON.parse(
+localStorage.getItem('ms_quotes') || '[]'
+);
+
+history = history.map(q=>{
+
+if(q.saved===savedId){
+
+q.estadoPago='Pagado';
+q.metodoPago=metodo;
+q.fechaPago=fechaPago;
+
+}
+
+return q;
+
+});
+
+localStorage.setItem(
+'ms_quotes',
+JSON.stringify(history)
+);
+
+const querySnapshot = await getDocs(
+collection(db,'cotizaciones')
+);
+
+for(const documento of querySnapshot.docs){
+
+const data = documento.data();
+
+if(data.saved===savedId){
+
+await updateDoc(
+doc(db,'cotizaciones',documento.id),
+{
+estadoPago:'Pagado',
+metodoPago:metodo,
+fechaPago:fechaPago
+}
+);
+
+}
+
+}
+
+closePaymentModal();
+
+showHistory();
 
 }
 
@@ -1909,9 +2777,9 @@ localStorage.getItem('ms_quotes') || '[]'
 
 history = history.map(q=>{
 
-if(q.saved === savedId){
+if(q.saved===savedId){
 
-q.estado = 'Aprobado';
+q.estado='Aprobado';
 
 }
 
@@ -1928,11 +2796,11 @@ const querySnapshot = await getDocs(
 collection(db,"cotizaciones")
 );
 
-querySnapshot.forEach(async (documento)=>{
+querySnapshot.forEach(async(documento)=>{
 
-const data = documento.data();
+const data=documento.data();
 
-if(data.saved === savedId){
+if(data.saved===savedId){
 
 await updateDoc(
 doc(db,"cotizaciones",documento.id),
@@ -2000,6 +2868,85 @@ showHistory();
 
 }
 
+async function deleteMonth(month){
+
+const monthName = new Date(
+month + '-01'
+).toLocaleDateString(
+'es-ES',
+{
+month:'long',
+year:'numeric'
+}
+);
+
+if(
+!confirm(
+`⚠️ ATENCIÓN
+
+Se eliminarán todas las cotizaciones de ${monthName}.
+
+Esta acción no se puede deshacer.
+
+¿Desea continuar?`
+)
+){
+return;
+}
+
+let history = JSON.parse(
+localStorage.getItem('ms_quotes') || '[]'
+);
+
+const toDelete = history.filter(q=>
+q.fecha &&
+q.fecha.startsWith(month)
+);
+
+history = history.filter(q=>
+!(
+q.fecha &&
+q.fecha.startsWith(month)
+)
+);
+
+localStorage.setItem(
+'ms_quotes',
+JSON.stringify(history)
+);
+
+const querySnapshot = await getDocs(
+collection(db,"cotizaciones")
+);
+
+for(const documento of querySnapshot.docs){
+
+const data = documento.data();
+
+if(
+data.fecha &&
+data.fecha.startsWith(month)
+){
+
+await deleteDoc(
+doc(
+db,
+"cotizaciones",
+documento.id
+)
+);
+
+}
+
+}
+
+alert(
+'Mes eliminado correctamente'
+);
+
+showHistory();
+
+}
 
 function exportPDF(month){
 
@@ -2090,7 +3037,9 @@ history.forEach(q=>{
 
 if(q.fecha && q.fecha.startsWith(month)){
 
-const increasePerMarker = getIncreasePerMarker(q.markers.length);
+const increasePerMarker = 
+q.increasePerMarker ??
+getIncreasePerMarker(q.markers.length);
 
 let items = '';
 
@@ -2265,6 +3214,22 @@ URL.revokeObjectURL(url);
 
 }
 
+document.querySelectorAll('.payment-card').forEach(card=>{
+
+card.addEventListener('click',()=>{
+
+document
+.querySelectorAll('.payment-card')
+.forEach(c=>c.classList.remove('selected'));
+
+card.classList.add('selected');
+
+card.querySelector('input').checked = true;
+
+});
+
+});
+
 
 function shareProgram(){
 
@@ -2372,6 +3337,40 @@ location.reload();
 
 }
 
+function clearForm(){
+
+if(
+!confirm(
+'¿Desea borrar toda la cotización actual?'
+)
+){
+return;
+}
+
+empresa.value='';
+paciente.value='';
+caso.value='';
+fecha.value='';
+
+marker.value='';
+
+selected=[];
+
+quoteAlreadySaved=false;
+
+document.getElementById(
+'manualIncrease'
+).value='';
+
+render();
+
+message.value='';
+
+price.innerHTML='$0.00';
+
+}
+
+
 function exitApp(){
 
 if(confirm("¿Deseas salir de la aplicación?")){
@@ -2386,6 +3385,334 @@ location.href="about:blank";
 },500);
 
 }
+
+}
+
+function toggleHistoryDetail(id){
+
+const box =
+document.getElementById(id);
+
+if(box.style.display==='none'){
+
+box.style.display='block';
+
+}else{
+
+box.style.display='none';
+
+}
+
+}
+
+function toggleMonth(id){
+
+const box =
+document.getElementById(id);
+
+if(box.style.display==='none'){
+
+box.style.display='block';
+
+}else{
+
+box
+.querySelectorAll('[id^="202"]')
+.forEach(detail=>{
+
+detail.style.display='none';
+
+});
+
+box.style.display='none';
+
+}
+
+}
+
+function filterHistory(){
+
+const search =
+document.getElementById('historySearch')
+.value
+.toLowerCase()
+.trim();
+
+const months =
+document.querySelectorAll('.month-box');
+
+months.forEach(month=>{
+
+let found = false;
+
+month
+.querySelectorAll('.quote-summary')
+.forEach(item=>{
+
+const text =
+item.dataset.search || '';
+
+if(
+search === '' ||
+text.includes(search)
+){
+
+item.style.display='block';
+
+found = true;
+
+}else{
+
+item.style.display='none';
+
+const next =
+item.nextElementSibling;
+
+if(next){
+next.style.display='none';
+}
+
+}
+
+});
+
+month.style.display =
+found ? 'block' : 'none';
+
+const section =
+month.querySelector('section');
+
+if(section){
+
+if(
+search !== '' &&
+found
+){
+
+section.style.display='block';
+
+}else{
+
+section.style.display='none';
+
+}
+
+}
+
+});
+
+}
+
+function showSuggestions(){
+
+const search =
+document.getElementById('historySearch')
+.value
+.toLowerCase()
+.trim();
+
+const box =
+document.getElementById(
+'searchSuggestions'
+);
+
+if(search===''){
+
+box.style.display='none';
+box.innerHTML='';
+
+return;
+
+}
+
+const suggestions = new Set();
+
+document
+.querySelectorAll('.quote-summary')
+.forEach(item=>{
+
+const text =
+item.dataset.search || '';
+
+if(text.includes(search)){
+
+const lines =
+item.innerText
+.split('\n')
+.map(x=>x.trim())
+.filter(x=>x);
+
+suggestions.add(
+JSON.stringify({
+title: lines[0] || '',
+detail: lines[1] || ''
+})
+);
+
+}
+
+});
+
+const results =
+Array.from(suggestions).slice(0,8);
+
+if(results.length===0){
+
+box.style.display='none';
+box.innerHTML='';
+
+return;
+
+}
+
+box.innerHTML='';
+
+results.forEach(result=>{
+
+const data =
+JSON.parse(result);
+
+box.innerHTML += `
+<div
+onclick="selectSuggestion('${data.title}')"
+style="
+padding:10px;
+cursor:pointer;
+border-bottom:1px solid #eee;
+">
+
+<div style="
+font-weight:bold;
+font-size:14px;
+">
+${data.title}
+</div>
+
+</div>
+`;
+
+});
+
+box.style.display='block';
+
+}
+function selectSuggestion(value){
+
+const caso =
+value
+.replace('🟢','')
+.replace('🟠','')
+.split('|')[0]
+.trim();
+
+document.getElementById(
+'historySearch'
+).value = caso;
+
+document.getElementById(
+'searchSuggestions'
+).style.display='none';
+
+filterHistory();
+
+}
+
+async function sendToLab(savedId){
+
+let history = JSON.parse(
+localStorage.getItem('ms_quotes') || '[]'
+);
+
+const quote = history.find(
+q => q.saved === savedId
+);
+
+if(!quote){
+return;
+}
+
+if(
+!confirm(
+`Confirmar envío al laboratorio
+
+Se enviará la solicitud de marcadores al laboratorio mediante WhatsApp.
+
+Una vez confirmado, la cotización quedará registrada como:
+
+✓ Enviado al laboratorio
+
+¿Desea continuar?`
+)
+){
+return;
+}
+
+const today = new Date();
+
+const fecha =
+String(today.getDate()).padStart(2,'0')
++ '-' +
+String(today.getMonth()+1).padStart(2,'0')
++ '-' +
+today.getFullYear();
+
+let markersText = '';
+
+quote.markers.forEach((m,index)=>{
+
+markersText +=
+(index+1) +
+'. ' +
+m.name +
+'\n';
+
+});
+
+const message =
+`SOLICITUD DE MARCADORES
+
+Paciente: ${quote.paciente}
+Caso: ${quote.caso}
+Fecha: ${fecha}
+
+Marcadores:
+${markersText.trim()}`;
+
+quote.fechaEnvioLaboratorio = fecha;
+
+localStorage.setItem(
+'ms_quotes',
+JSON.stringify(history)
+);
+
+const querySnapshot = await getDocs(
+collection(db,'cotizaciones')
+);
+
+for(const documento of querySnapshot.docs){
+
+const data = documento.data();
+
+if(data.saved === savedId){
+
+await updateDoc(
+doc(db,'cotizaciones',documento.id),
+{
+fechaEnvioLaboratorio: fecha
+}
+);
+
+}
+
+}
+
+showHistory();
+
+window.open(
+'https://wa.me/?text=' +
+encodeURIComponent(message),
+'_blank'
+);
 
 }
 
